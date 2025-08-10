@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Cake</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: url('06b42b83ad7581964282331e54ab8dc6.jpg') no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Blur overlay */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        filter: blur(10px) brightness(0.7);
+        z-index: 0;
+    }
+
+    /* Sparkles */
+    .sparkle {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: sparkleMove 6s infinite ease-in-out;
+    }
+    @keyframes sparkleMove {
+        0% { transform: translateY(0); opacity: 0.8; }
+        50% { opacity: 0.4; }
+        100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    /* Balloons floating */
+    .balloon {
+        position: absolute;
+        width: 120px;
+        animation: floatUp 10s linear infinite, sway 3s ease-in-out infinite;
+        z-index: 1;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh); }
+        100% { transform: translateY(-200px); }
+    }
+    @keyframes sway {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(20px); }
+    }
+
+    /* Cake in center */
+    .cake {
+        position: relative;
+        z-index: 2;
+        animation: floatCake 4s ease-in-out infinite;
+        max-width: 350px;
+        border-radius: 20px;
+    }
+    @keyframes floatCake {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+</style>
+</head>
+<body>
+
+<!-- Balloons -->
+<img src="balloons-png-hd-balloons-png-hd-2750 (1).png" class="balloon" style="left:5%; animation-delay:0s;">
+<img src="balloons-png-hd-balloons-png-hd-2750 (1).png" class="balloon" style="left:20%; animation-delay:2s;">
+<img src="balloons-png-hd-balloons-png-hd-2750 (1).png" class="balloon" style="left:40%; animation-delay:4s;">
+<img src="balloons-png-hd-balloons-png-hd-2750 (1).png" class="balloon" style="left:60%; animation-delay:1s;">
+<img src="balloons-png-hd-balloons-png-hd-2750 (1).png" class="balloon" style="left:80%; animation-delay:3s;">
+
+<!-- Cake -->
+<img src="giphy.webp" alt="Cake" class="cake">
+
+<!-- Sparkles -->
+<script>
+    for(let i=0; i<15; i++){
+        let s = document.createElement('div');
+        s.className = 'sparkle';
+        s.style.width = s.style.height = Math.random()*6 + 4 + 'px';
+        s.style.left = Math.random()*100 + '%';
+        s.style.top = Math.random()*100 + '%';
+        s.style.animationDuration = (Math.random()*3 + 3) + 's';
+        document.body.appendChild(s);
+    }
+</script>
+
+<!-- Add this before the closing </body> tag in cake.html -->
+<div style="
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 999;
+">
+    <a href="last.html" style="
+        padding: 16px 28px;
+        background: linear-gradient(45deg, #ff6ec7, #ffcc70);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 30px;
+        text-decoration: none;
+        box-shadow: 0 0 15px rgba(255, 110, 199, 0.8);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 20px rgba(255, 110, 199, 1)';" 
+       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 15px rgba(255, 110, 199, 0.8)';">
+        💌 Final Message
+    </a>
+</div>
+<iframe src="music.html" allow="autoplay" style="display:none"></iframe>
+
+
+</body>
+</html>

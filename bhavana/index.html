@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Bhavana</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('thumb-1920-1061799.jpg') no-repeat center center fixed;
+        background-size: cover;
+        overflow: hidden;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    /* Glassmorphic Card */
+    .card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px 50px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+        z-index: 10;
+    }
+
+    .card h1 {
+        font-size: 2.5em;
+        color: #fff;
+        margin-bottom: 15px;
+        text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493; }
+        to { text-shadow: 0 0 30px #ff69b4, 0 0 60px #ff1493; }
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background: linear-gradient(45deg, #ff69b4, #ff1493);
+        color: #fff;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 1.2em;
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+        transition: 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+    }
+
+    /* Floating panda images from each corner */
+    .floating {
+        position: absolute;
+        width: 120px;
+        height: auto;
+        animation: spin 6s linear infinite;
+    }
+
+    /* Top-left to top-right to bottom-right to bottom-left */
+    .corner1 {
+        animation: moveTL 20s linear infinite, spin 6s linear infinite;
+    }
+    @keyframes moveTL {
+        0%   { top: 5%; left: 5%; }
+        25%  { top: 5%; left: calc(95% - 120px); }
+        50%  { top: calc(95% - 120px); left: calc(95% - 120px); }
+        75%  { top: calc(95% - 120px); left: 5%; }
+        100% { top: 5%; left: 5%; }
+    }
+
+    /* Top-right to bottom-right to bottom-left to top-left */
+    .corner2 {
+        animation: moveTR 20s linear infinite, spin 6s linear infinite;
+    }
+    @keyframes moveTR {
+        0%   { top: 5%; left: calc(95% - 120px); }
+        25%  { top: calc(95% - 120px); left: calc(95% - 120px); }
+        50%  { top: calc(95% - 120px); left: 5%; }
+        75%  { top: 5%; left: 5%; }
+        100% { top: 5%; left: calc(95% - 120px); }
+    }
+
+    /* Bottom-right to bottom-left to top-left to top-right */
+    .corner3 {
+        animation: moveBR 20s linear infinite, spin 6s linear infinite;
+    }
+    @keyframes moveBR {
+        0%   { top: calc(95% - 120px); left: calc(95% - 120px); }
+        25%  { top: calc(95% - 120px); left: 5%; }
+        50%  { top: 5%; left: 5%; }
+        75%  { top: 5%; left: calc(95% - 120px); }
+        100% { top: calc(95% - 120px); left: calc(95% - 120px); }
+    }
+
+    /* Bottom-left to top-left to top-right to bottom-right */
+    .corner4 {
+        animation: moveBL 20s linear infinite, spin 6s linear infinite;
+    }
+    @keyframes moveBL {
+        0%   { top: calc(95% - 120px); left: 5%; }
+        25%  { top: 5%; left: 5%; }
+        50%  { top: 5%; left: calc(95% - 120px); }
+        75%  { top: calc(95% - 120px); left: calc(95% - 120px); }
+        100% { top: calc(95% - 120px); left: 5%; }
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg) scale(1); }
+        to { transform: rotate(360deg) scale(1.05); }
+    }
+</style>
+</head>
+<body>
+
+<!-- Center Glass Card -->
+<div class="card">
+    <h1>🎉 Happy Birthday Bhavana 🎉</h1>
+    <a href="suprise.html" class="btn">Click for Happy Birthday message 💖</a>
+</div>
+
+<!-- Floating Pandas from each corner -->
+<img src="633154-cute-baby-panda-wallpaper.jpg" class="floating corner1">
+<img src="cute-baby-panda-bear-with-big-eyes-3d-rendering-cartoon-illustration_691560-4924.avif" class="floating corner2">
+<img src="HD-wallpaper-cute-and-sweet-animated-panda-cute-and-sweet-animated-panda-pink-heart.jpg" class="floating corner3">
+<img src="176188-cute-baby-panda-cartoon-wallpaper-panda-background-panda-image.jpg" class="floating corner4">
+<iframe src="music.html" allow="autoplay" style="display:none"></iframe>
+
+
+</body>
+</html>

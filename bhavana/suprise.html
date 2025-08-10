@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Surprise for Bhavana</title>
+
+<!-- Optional: add a friendly font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --img-size: 140px; /* size of orbiting images */
+    --move-duration: 24s; /* how long one full loop takes */
+    --spin-duration: 8s;  /* rotation speed */
+  }
+
+  /* mobile friendly size */
+  @media (max-width:700px){
+    :root { --img-size: 96px; --move-duration: 28s; --spin-duration: 10s; }
+  }
+
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: url('thumb-1920-1061799.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  /* center message box */
+  .center-box{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%) scale(0.98);
+    text-align:center;
+    z-index: 30;
+    width: min(88%, 800px);
+    padding: 26px 28px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.12));
+    backdrop-filter: blur(6px) saturate(1.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    animation: fadeInScale 1s ease forwards;
+    pointer-events: none;
+  }
+
+  .center-box h1{
+    margin:0 0 10px 0;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    color: #fff;
+    line-height:1.05;
+    text-shadow: 0 6px 24px rgba(255,105,180,0.28);
+    animation: glow 2.2s ease-in-out infinite alternate;
+  }
+
+  .center-box p{
+    margin:0;
+    font-size: clamp(1rem, 2.4vw, 1.15rem);
+    color: rgba(255, 240, 255, 0.95);
+    text-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
+  @keyframes glow{
+    from { text-shadow: 0 6px 18px rgba(255,105,180,0.25), 0 0 6px rgba(255,80,160,0.12); }
+    to   { text-shadow: 0 10px 36px rgba(255,105,180,0.36), 0 0 12px rgba(255,60,140,0.16); }
+  }
+
+  @keyframes fadeInScale{
+    from { opacity:0; transform: translate(-50%,-50%) scale(0.95); }
+    to   { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  }
+
+  /* wrapper for floating image */
+  .float {
+    position: absolute;
+    width: var(--img-size);
+    height: var(--img-size);
+    pointer-events: none;
+    z-index: 20;
+    will-change: top, left, transform;
+  }
+
+  .float img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius:12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    transform-origin: center center;
+    animation: pulse 3.2s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Paths starting from different corners */
+  @keyframes moveSquare1 {
+    0%   { top: 5%; left: 5%; }
+    25%  { top: 5%; left: calc(100% - var(--img-size) - 5%); }
+    50%  { top: calc(100% - var(--img-size) - 5%); left: calc(100% - var(--img-size) - 5%); }
+    75%  { top: calc(100% - var(--img-size) - 5%); left: 5%; }
+    100% { top: 5%; left: 5%; }
+  }
+  @keyframes moveSquare2 {
+    0%   { top: 5%; left: calc(100% - var(--img-size) - 5%); }
+    25%  { top: calc(100% - var(--img-size) - 5%); left: calc(100% - var(--img-size) - 5%); }
+    50%  { top: calc(100% - var(--img-size) - 5%); left: 5%; }
+    75%  { top: 5%; left: 5%; }
+    100% { top: 5%; left: calc(100% - var(--img-size) - 5%); }
+  }
+  @keyframes moveSquare3 {
+    0%   { top: calc(100% - var(--img-size) - 5%); left: calc(100% - var(--img-size) - 5%); }
+    25%  { top: calc(100% - var(--img-size) - 5%); left: 5%; }
+    50%  { top: 5%; left: 5%; }
+    75%  { top: 5%; left: calc(100% - var(--img-size) - 5%); }
+    100% { top: calc(100% - var(--img-size) - 5%); left: calc(100% - var(--img-size) - 5%); }
+  }
+  @keyframes moveSquare4 {
+    0%   { top: calc(100% - var(--img-size) - 5%); left: 5%; }
+    25%  { top: 5%; left: 5%; }
+    50%  { top: 5%; left: calc(100% - var(--img-size) - 5%); }
+    75%  { top: calc(100% - var(--img-size) - 5%); left: calc(100% - var(--img-size) - 5%); }
+    100% { top: calc(100% - var(--img-size) - 5%); left: 5%; }
+  }
+
+  @keyframes pulse {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.06); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  @media (max-width:420px){
+    .float { display:none; }
+    .center-box { padding:18px; }
+  }
+
+  .vignette {
+    position: absolute; inset:0;
+    background: radial-gradient(60% 60% at 50% 50%,
+                rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.25) 100%);
+    z-index: 5;
+    pointer-events:none;
+  }
+
+  /* Cut Cake Button styling */
+  .cut-cake-wrapper {
+    position: absolute;
+    top: calc(50% + 160px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 40;
+  }
+  .cut-cake-wrapper a {
+    display: none;
+    padding: 20px 20px;
+    background: linear-gradient(45deg, #ff6ec7, #ffcc70);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 25px;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(255, 110, 199, 0.8);
+  }
+</style>
+</head>
+<body>
+
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="center-box" role="dialog" aria-label="Birthday message for Bhavana">
+  <h1>Bhavana — my sweetest dream come true 💖</h1>
+  <p>May your day be full of laughter, cuddles, and tiny wonders. I made this just for you — with all my heart.
+    🐼 Like pandas so fluffy, gentle, and sweet,
+You make every heart skip a beat. 💖
+Today’s your day, so let’s all cheer,
+With laughter, smiles, and love so dear. 🎉
+Balloons will rise, and music will play,
+As we celebrate you in every way. 🎂
+You’re special, bright, and one of a kind,
+A treasure forever in heart and mind. 💕
+Happy Birthday, Bhavana! 🌸
+  </p>
+</div>
+
+<!-- Floating pandas from different corners -->
+<div class="float" style="animation: moveSquare1 var(--move-duration) linear infinite;">
+  <img src="HD-wallpaper-cute-and-sweet-animated-panda-cute-and-sweet-animated-panda-pink-heart.jpg" alt="panda 1">
+</div>
+<div class="float" style="animation: moveSquare2 var(--move-duration) linear infinite;">
+  <img src="ai-art-baby-animals-panda-sitting-hd-wallpaper-preview.jpg" alt="panda 2">
+</div>
+<div class="float" style="animation: moveSquare3 var(--move-duration) linear infinite;">
+  <img src="633154-cute-baby-panda-wallpaper.jpg" alt="panda 3">
+</div>
+<div class="float" style="animation: moveSquare4 var(--move-duration) linear infinite;">
+  <img src="cute-baby-panda-bear-with-big-eyes-3d-rendering-cartoon-illustration_691560-4924.avif" alt="panda 4">
+</div>
+
+<!-- Cut Cake Button -->
+<div class="cut-cake-wrapper">
+  <a id="cutCakeBtn" href="cake.html">🎂 Let's Cut the Cake!</a>
+</div>
+
+<script>
+  // Show button after 5 seconds
+  window.addEventListener('load', function() {
+      setTimeout(function() {
+          document.getElementById('cutCakeBtn').style.display = 'inline-block';
+      }, 5000);
+  });
+</script>
+<iframe src="music.html" allow="autoplay" style="display:none"></iframe>
+
+</body>
+</html>

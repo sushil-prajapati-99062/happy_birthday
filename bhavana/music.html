@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Background Music</title>
+</head>
+<body>
+<audio id="bgMusic" loop>
+    <source src="abc.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('click', function playMusic() {
+    document.getElementById('bgMusic').play();
+    document.removeEventListener('click', playMusic);
+});
+</script>
+</body>
+</html>
